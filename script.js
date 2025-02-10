@@ -17,9 +17,9 @@ toggleBtn.addEventListener('click', (e)=>{
     }
 })
 
-async function getTvShowData(title, premiered){
+async function getTvShowData(title){
     try{
-        let res = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${title}&date=${premiered}`);
+        let res = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${title}`);
         let data = await res.json();
         document.getElementById("show-title").innerHTML = data.name;
         document.getElementById("show-cover").src = data.image.original;
@@ -37,12 +37,9 @@ params.forEach((value, key)=>{
     console.log(`Key: ${key}, Value: ${decodeURIComponent(value)}`);
     if(key === "show_name"){
         entries.show_name = value;
-    }else{
-        entries.date = value
     }
 });
 
-const {show_name, date} = entries;
-
-getTvShowData(show_name, date);
+const {show_name} = entries;
+getTvShowData(show_name);
 
